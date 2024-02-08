@@ -22,7 +22,7 @@ async function run() {
       ],
     });
 
-    const humanReadableNotes = completion.data.choices[0].message.content;
+    const humanReadableNotes = completion.choices[0];
     core.setOutput("human_readable_notes", humanReadableNotes);
   } catch (error) {
     core.setFailed(error.message);
