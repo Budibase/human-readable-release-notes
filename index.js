@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import OpenAI from "openai";
 
-const openai = new OpenAI();
+const openai = new OpenAI({ apiKey: core.getInput("openai_api_key") });
 
 async function run() {
   try {
