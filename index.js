@@ -1,29 +1,28 @@
 // index.js
-const core = require('@actions/core');
-const axios = require('axios');
+const core = require("@actions/core");
+const openai = require("openai");
 
 async function run() {
   try {
-    const token = core.getInput('token');
-    const releaseNotes = core.getInput('release_notes');
+    const releaseNotes = core.getInput("release_notes");
 
-    const response = await axios.post(
-      'https://api.openai.com/v4/completions',
-      {
-        model: "text-davinci-003",
-        prompt: `Convert these release notes into a human-readable format:\n\n${releaseNotes}`,
-        temperature: 0.7,
-        max_tokens: 1024,
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a helpful assistant that summarizes release notes in human readable format for non-technical users.",
         },
-      }
-    );
+        {
+          role: "user",
+          content: "Summarize the following release notes: " + releaseNotes,
+        },
+      ],
+      model: "gpt-3.5-turbo",
+    });
 
-    const humanReadableNotes = response.data.choices[0].text.trim();
-    core.setOutput('human_readable_notes', humanReadableNotes);
+    const humanReadableNotes = completion.choices[0];
+    core.setOutput("human_readable_notes", humanReadableNotes);
   } catch (error) {
     core.setFailed(error.message);
   }
