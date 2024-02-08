@@ -1,16 +1,15 @@
-name: 'Generate Human-Readable Release Notes'
-description: 'Converts raw release notes into a human-readable format using OpenAI GPT.'
+name: "Generate Human-Readable Release Notes"
+description: "Converts raw release notes into a human-readable format using OpenAI GPT."
 inputs:
   token:
-    description: 'OpenAI API key for authentication.'
+    description: "OpenAI API key for authentication."
     required: true
   release_notes:
-    description: 'Raw release notes to be converted.'
+    description: "Raw release notes to be converted."
     required: true
 outputs:
   human_readable_notes:
-    description: 'The converted, human-readable release notes.'
+    description: "The converted, human-readable release notes."
 runs:
-  using: 'node20'
-  main: 'index.js'
-  pre: 'npm install'
+  using: "node12"
+  main: "dist/index.bundle.js"
