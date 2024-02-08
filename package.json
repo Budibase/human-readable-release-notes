@@ -1,0 +1,10 @@
+{
+  "name": "generate-notes",
+  "version": "1.0.0",
+  "description": "A GitHub Action to generate human-readable release notes using OpenAI.",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "axios": "^0.21.1"
+  }
+}
