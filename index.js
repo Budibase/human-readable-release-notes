@@ -1,12 +1,14 @@
-// index.js
-const core = require("@actions/core");
-const openai = require("openai");
+import * as core from "@actions/core";
+import OpenAI from "openai";
+
+const openai = new OpenAI();
 
 async function run() {
   try {
     const releaseNotes = core.getInput("release_notes");
 
-    const completion = await openai.chat.completions.create({
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
@@ -15,13 +17,12 @@ async function run() {
         },
         {
           role: "user",
-          content: "Summarize the following release notes: " + releaseNotes,
+          content: `Summarize the following release notes: ${releaseNotes}`,
         },
       ],
-      model: "gpt-3.5-turbo",
     });
 
-    const humanReadableNotes = completion.choices[0];
+    const humanReadableNotes = completion.data.choices[0].message.content;
     core.setOutput("human_readable_notes", humanReadableNotes);
   } catch (error) {
     core.setFailed(error.message);
