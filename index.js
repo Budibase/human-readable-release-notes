@@ -13,7 +13,7 @@ async function run() {
         {
           role: "system",
           content:
-            "You are a helpful assistant that summarizes release notes in human readable format for non-technical users.",
+            "You are a helpful assistant that summarizes release notes in layman terms for non-technical users.",
         },
         {
           role: "user",
