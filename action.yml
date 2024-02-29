@@ -4,6 +4,9 @@ inputs:
   release_notes:
     description: "Raw release notes to be converted."
     required: true
+  openai_api_key:
+    description: "OpenAI API Key"
+    required: true
 outputs:
   human_readable_notes:
     description: "The converted, human-readable release notes."
