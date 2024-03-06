@@ -23,9 +23,8 @@ async function run() {
       ],
     });
 
-    const response = completion.choices[0];
-    const humanReadableNotes = response.message.content.content;
-    core.setOutput("human_readable_notes", humanReadableNotes);
+    const response = completion.choices[0].message.content;
+    core.setOutput("human_readable_notes", response);
   } catch (error) {
     core.setFailed(error.message);
   }
