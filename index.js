@@ -5,7 +5,8 @@ const openai = new OpenAI({ apiKey: core.getInput("openai_api_key") });
 
 async function run() {
   try {
-    const releaseNotes = core.getInput("release_notes");
+    const releaseNotesb64 = core.getInput("release_notes");
+    const releaseNotes = atob(releaseNotesb64);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
